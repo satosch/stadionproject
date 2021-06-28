@@ -30,11 +30,11 @@ public class Confirmation extends JPanel {
 		
 		JLabel test = new JLabel("The Seat(s) is(are) Successfully booked");
 		
-		JButton close = new JButton("Close/Restart the program");
+		JButton close = new JButton("Close the program.");
 		close.setBounds(537, 951, 280, 21);
 		close.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				pc(mf.PanelNames[0]);
+				System.exit(0);
 			}
 		});
 		cpanel.add(test,BorderLayout.NORTH);
