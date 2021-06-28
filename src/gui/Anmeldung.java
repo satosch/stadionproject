@@ -4,6 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -16,14 +18,15 @@ public class Anmeldung extends JPanel{
 	public Anmeldung(MainFrame m, String s) {
 		mf = m;
 		str = s;
+		this.setName(s);
 		this.setBounds(100, 100, 571, 604);
 		
 		JLabel label = new JLabel("New User Registration");
 		this.add(label, BorderLayout.NORTH);
 		
-		JPanel panel = new JPanel();
-		this.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(11,2));
+		JPanel apanel = new JPanel();
+		this.add(apanel, BorderLayout.CENTER);
+		apanel.setLayout(new GridLayout(11,2));
 		
 		JLabel label1 = new JLabel("Anrede");
 		JLabel label2 = new JLabel("Vorname");
@@ -58,34 +61,43 @@ public class Anmeldung extends JPanel{
 		txt9.setColumns(10);
 		
 		JButton anmelden = new JButton("anmelden");
+		anmelden.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pc(mf.PanelNames[1]);
+			}
+		});
 		JButton zuruck = new JButton("Zurück");
+		zuruck.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				pc(mf.PanelNames[0]);
+			}
+		});
 		
-		panel.add(label1);
-		panel.add(txt1);
-		panel.add(label2);
-		panel.add(txt2);
-		panel.add(label3);
-		panel.add(txt3);
-		panel.add(label4);
-		panel.add(txt4);
-		panel.add(label5);
-		panel.add(txt5);
-		panel.add(label6);
-		panel.add(txt6);
-		panel.add(label7);
-		panel.add(txt7);
-		panel.add(label8);
-		panel.add(txt8);
-		panel.add(label9);
-		panel.add(txt9);
-		panel.add(leer1);
-		panel.add(anmelden);
-		panel.add(leer2);
-		panel.add(zuruck);
-		
-		
-				
-		
+		apanel.add(label1);
+		apanel.add(txt1);
+		apanel.add(label2);
+		apanel.add(txt2);
+		apanel.add(label3);
+		apanel.add(txt3);
+		apanel.add(label4);
+		apanel.add(txt4);
+		apanel.add(label5);
+		apanel.add(txt5);
+		apanel.add(label6);
+		apanel.add(txt6);
+		apanel.add(label7);
+		apanel.add(txt7);
+		apanel.add(label8);
+		apanel.add(txt8);
+		apanel.add(label9);
+		apanel.add(txt9);
+		apanel.add(leer1);
+		apanel.add(anmelden);
+		apanel.add(leer2);
+		apanel.add(zuruck);		
 	}
+	public void pc(String str){
+		mf.PanelChange((JPanel)this, str);
+}
 
 }
