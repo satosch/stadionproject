@@ -43,6 +43,7 @@ public class ConnectToServer {
 		int seat_id = 0;
 		String sql = "SELECT seat_id FROM seat "
 				+ "WHERE block="+block_id+" AND seat_nr="+ seat_nr +";";
+		System.out.println(sql);
 		try {
 			ResultSet rs = st.executeQuery(sql);
 			if(rs.next()) {

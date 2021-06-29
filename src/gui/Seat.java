@@ -13,7 +13,7 @@ public class Seat extends JPanel {
 	String str;
 	static int block = 0; 
 	static int maxseat = 50;
-	static int[] selectedseat = new int[maxseat];
+	int[] selectedseat = new int[maxseat];
     static int x = 0;
     
 	private static JToggleButton[] seats = new JToggleButton[500];
@@ -70,32 +70,29 @@ public class Seat extends JPanel {
 		confirm.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				ConnectToServer cs = new ConnectToServer();
-				boolean ifSelected = true;
+				boolean ifSelected = false;
 				
 				if (block == 0){
-					ifSelected = false;
+					selectedSeats.setText("choose the correct seat and block");	
+					return;
 					} else {
 					for (int i =0; i<selectedseat.length;i++) {
 						if (selectedseat[i]!=0) {
+							ifSelected = true;
 							{	
 								int selectedseatid = cs.findSeatid(block,selectedseat[i]);
 								cs.bookTicket(1,selectedseatid);
-								selectedseat[i] = 0;
 							}
-						} else {
-							ifSelected = false;
-							break;
-						}
-						if(ifSelected!=true) {
-							selectedSeats.setText("choose the correct seat and block");	
-							break;
-						} else {
-							block=0;
-							pc(mf.PanelNames[3]);
 						}
 					}
+					if(ifSelected==true) {
+						pc(mf.PanelNames[3]);
+					} else {
+						selectedSeats.setText("choose the correct seat and block");	
+						return;
+					}
 				}
-			}});
+					}});
 		
 		seatdetailsnorth.setLayout(new FlowLayout());
 //		seatdetailsnorth.add(vorname);
@@ -146,20 +143,19 @@ public class Seat extends JPanel {
         ActionListener seatSelectionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                showSelectedSeats();
-                
+            	showSelectedSeats();
             }
         };
-
         for (int ii=0; ii <seats.length; ii++) {
             JToggleButton tb = new JToggleButton(ii+1+"");
             tb.addActionListener(seatSelectionListener);
             seats[ii] = tb;
             centerStall.add(tb);}
         }
-
+    
     private void showSelectedSeats() {
-        StringBuilder sb = new StringBuilder();
+    	StringBuilder sb = new StringBuilder();
+    	selectedseat = new int[maxseat];
         for (int ii=0; ii<seats.length; ii++) {
             JToggleButton tb = seats[ii];
             if (tb.isSelected()) {
@@ -168,7 +164,6 @@ public class Seat extends JPanel {
             	x = x + 1;
             	sb.append(text);
                 sb.append(", ");
-               
             }
         }
         String s = sb.toString();
