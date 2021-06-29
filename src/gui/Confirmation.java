@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,6 +15,7 @@ public class Confirmation extends JPanel {
 
 	MainFrame mf;
 	String str;
+	String text = new String("");
 	
 	public Confirmation(MainFrame m, String s) {
 		mf = m;
@@ -28,6 +30,7 @@ public class Confirmation extends JPanel {
 		this.add(cpanel,BorderLayout.PAGE_START);
 		
 		JLabel test = new JLabel("The Seat(s) is(are) Successfully booked");
+		JLabel test2 = new JLabel(Seat.getTxt());
 		
 		JButton close = new JButton("Close the program.");
 		close.setBounds(537, 951, 280, 21);
@@ -37,6 +40,7 @@ public class Confirmation extends JPanel {
 			}
 		});
 		cpanel.add(test,BorderLayout.NORTH);
+//		cpanel.add(test2,BorderLayout.CENTER);
 		cpanel.add(close,BorderLayout.SOUTH);
 	}	
 		public void pc(String str){

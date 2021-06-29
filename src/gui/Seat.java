@@ -2,8 +2,12 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+
 import javax.swing.*;
 import javax.swing.border.*;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import connecttoserver.ConnectToServer;
 import connecttoserver.Ticket;
@@ -18,7 +22,9 @@ public class Seat extends JPanel {
     
 	private static JToggleButton[] seats = new JToggleButton[500];
     private JTextArea selectedSeats = new JTextArea(3, 40);
-  
+    private static String[] txt = new String[maxseat];
+    
+    
     public Seat(MainFrame m, String s) {
     	mf = m;
     	str = s;
@@ -45,14 +51,14 @@ public class Seat extends JPanel {
 		seatdetails.add(seatdetailsnorth, BorderLayout.NORTH);
 		seatdetails.add(seatdetailssouth, BorderLayout.SOUTH);
 		
-		JLabel blocknr = new JLabel("Gew¸nschte Block Nr");
+		JLabel blocknr = new JLabel("Gew√ºnschte Block Nr");
 //		JLabel vorname = new JLabel("vorname");
 //		JTextField vornameinput = new JTextField();
 //		vornameinput.setPreferredSize( new Dimension( 200, 24 ) );
 //		JLabel nachname = new JLabel("nachname");
 //		JTextField nachnameinput = new JTextField();
 //		nachnameinput.setPreferredSize( new Dimension( 200, 24 ) );
-//		JLabel address = new JLabel("Straﬂe und Hausnummer");
+//		JLabel address = new JLabel("Stra√üe und Hausnummer");
 //		JTextField addressinput = new JTextField();
 //		addressinput.setPreferredSize( new Dimension( 200, 24 ) );
 //		JLabel plz = new JLabel("PLZ");
@@ -82,6 +88,8 @@ public class Seat extends JPanel {
 							{	
 								int selectedseatid = cs.findSeatid(block,selectedseat[i]);
 								cs.bookTicket(1,selectedseatid);
+								txt[i] = "booked the seat"+ selectedseatid + "on match 1.";
+								}
 							}
 						}
 					}
@@ -91,8 +99,8 @@ public class Seat extends JPanel {
 						selectedSeats.setText("choose the correct seat and block");	
 						return;
 					}
-				}
-					}});
+					}
+				});
 		
 		seatdetailsnorth.setLayout(new FlowLayout());
 //		seatdetailsnorth.add(vorname);
@@ -110,7 +118,7 @@ public class Seat extends JPanel {
 //		seatdetailssouth.add(emailinput);
 //		
 		seatdetailssouth.add(blocknr);
-		final String[] blockdata = {"","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
+		final String[] blockdata = {"","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36"};
 		final JComboBox<String> blockBox = new JComboBox<String>(blockdata);
 		seatdetailssouth.add(blockBox);
 		
@@ -176,5 +184,7 @@ public class Seat extends JPanel {
     public void pc(String str){
 		mf.PanelChange((JPanel)this, str);
 }
-    
+    public static String getTxt() {
+    	return Arrays.toString(txt);
+    }
 }
